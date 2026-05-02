@@ -48,16 +48,42 @@ Las descripciones deben ser claras y específicas: incluye distancias, tiempos y
   return JSON.parse(jsonMatch[0]);
 }
 
-async function extractOnboardingInfo(userSpeech, field) {
-  const prompts = {
-    name: `Del siguiente texto, extrae únicamente el nombre propio de la persona. Responde SOLO con el nombre, sin más texto ni puntuación.\nTexto: "${userSpeech}"`,
-    level: `Del siguiente texto, identifica el nivel de experiencia en running. Responde SOLO con una de estas palabras exactas: "principiante", "intermedio" o "avanzado".\nTexto: "${userSpeech}"`,
-    goal: `Del siguiente texto, identifica la meta de running. Responde SOLO con una de estas opciones exactas: "5k", "10k", "medio maratón", "maratón", "condición física general".\nTexto: "${userSpeech}"`,
-    days: `Del siguiente texto, extrae el número de días a la semana que la persona quiere entrenar. Responde SOLO con el número entero entre 1 y 7.\nTexto: "${userSpeech}"`
-  };
+function extractLevel(text) {
+  const t = text.toLowerCase();
+  if (t.includes('avanzado') || t.includes('experto') || t.includes('profesional')) return 'avanzado';
+  if (t.includes('intermedio') || t.includes('moderado')) return 'intermedio';
+  if (t.includes('principiante') || t.includes('básico') || t.includes('novato') || t.includes('nuevo')) return 'principiante';
+  return null;
+}
 
-  const result = await model.generateContent(prompts[field]);
-  return result.response.text().trim().toLowerCase();
+function extractGoal(text) {
+  const t = text.toLowerCase();
+  if ((t.includes('medio') || t.includes('media') || t.includes('21')) && !t.includes('maratón completo')) return 'medio maratón';
+  if (t.includes('maratón') || t.includes('maraton') || t.includes('42')) return 'maratón';
+  if (t.includes('10') || t.includes('diez')) return '10k';
+  if (t.includes('5') || t.includes('cinco')) return '5k';
+  if (t.includes('condición') || t.includes('condicion') || t.includes('forma') || t.includes('general')) return 'condición física general';
+  return null;
+}
+
+async function extractOnboardingInfo(userSpeech, field) {
+  // Level and goal use local matching — no Gemini needed for fixed values
+  if (field === 'level') {
+    return extractLevel(userSpeech) || 'principiante';
+  }
+  if (field === 'goal') {
+    return extractGoal(userSpeech) || 'condición física general';
+  }
+  if (field === 'days') {
+    const match = userSpeech.match(/\d+/);
+    return match ? match[0] : '3';
+  }
+
+  // Only use Gemini for the name (free-form, can't be matched statically)
+  const result = await model.generateContent(
+    `Del siguiente texto, extrae únicamente el nombre propio de la persona. Responde SOLO con el nombre, sin más texto ni puntuación.\nTexto: "${userSpeech}"`
+  );
+  return result.response.text().trim();
 }
 
 async function generateDailyWorkoutSpeech(workout, userName) {

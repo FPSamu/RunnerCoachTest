@@ -120,6 +120,8 @@
             }
           ],
           "samples": [
+            "{level}",
+            "soy {level}",
             "cambiar mi nivel a {level}",
             "cambiar nivel a {level}",
             "mi nivel es {level}",
@@ -139,6 +141,8 @@
             }
           ],
           "samples": [
+            "{goal}",
+            "correr {goal}",
             "mi nueva meta es {goal}",
             "cambiar mi meta a {goal}",
             "quiero correr {goal}",
@@ -176,7 +180,17 @@
             }
           ],
           "samples": [
-            "{userInput}"
+            "me llamo {userInput}",
+            "mi nombre es {userInput}",
+            "soy {userInput}",
+            "llámame {userInput}",
+            "mi meta es {userInput}",
+            "quiero {userInput}",
+            "mi objetivo es {userInput}",
+            "mi nivel es {userInput}",
+            "quiero entrenar {userInput}",
+            "voy a entrenar {userInput} días",
+            "entreno {userInput} días a la semana"
           ]
         }
       ],

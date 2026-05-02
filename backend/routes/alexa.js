@@ -11,15 +11,17 @@ function getCurrentDay() {
   return day === 0 ? 7 : day;
 }
 
-// Extracts the user's spoken value from whichever slot Alexa filled
+// Extracts the user's spoken value from whichever slot Alexa filled.
+// level and goal are checked first so onboarding routing works correctly
+// when UpdateLevelIntent / UpdateGoalIntent fire during onboarding.
 function getSlotValue(slots = {}) {
   return (
-    slots.userInput?.value ||
-    slots.duration?.value ||
-    slots.effort?.value ||
     slots.level?.value ||
     slots.goal?.value ||
     slots.days?.value ||
+    slots.userInput?.value ||
+    slots.duration?.value ||
+    slots.effort?.value ||
     ''
   );
 }

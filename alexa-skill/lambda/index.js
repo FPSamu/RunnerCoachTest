@@ -1,8 +1,6 @@
-// Node.js 18+ has built-in fetch — no dependencies needed.
-// Set BACKEND_URL as a Lambda environment variable pointing to your Render service.
-// Example: https://runner-coach-backend.onrender.com/alexa/handler
+const https = require('https');
 
-const BACKEND_URL = process.env.BACKEND_URL;
+const BACKEND_URL = 'https://runnercoachtest.onrender.com/alexa/handler';
 
 const ERROR_RESPONSE = {
   version: '1.0',
@@ -15,27 +13,41 @@ const ERROR_RESPONSE = {
   }
 };
 
-exports.handler = async (event) => {
-  if (!BACKEND_URL) {
-    console.error('BACKEND_URL environment variable is not set');
-    return ERROR_RESPONSE;
-  }
-
-  try {
-    const response = await fetch(BACKEND_URL, {
+function postToBackend(body) {
+  return new Promise((resolve, reject) => {
+    const bodyStr = JSON.stringify(body);
+    const options = {
+      hostname: 'runnercoachtest.onrender.com',
+      port: 443,
+      path: '/alexa/handler',
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(event)
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(bodyStr)
+      }
+    };
+
+    const req = https.request(options, (res) => {
+      let data = '';
+      res.on('data', (chunk) => { data += chunk; });
+      res.on('end', () => {
+        if (res.statusCode >= 200 && res.statusCode < 300) {
+          resolve(JSON.parse(data));
+        } else {
+          reject(new Error(`Backend error ${res.statusCode}: ${data}`));
+        }
+      });
     });
 
-    if (!response.ok) {
-      console.error(`Backend responded with status ${response.status}`);
-      return ERROR_RESPONSE;
-    }
+    req.on('error', reject);
+    req.write(bodyStr);
+    req.end();
+  });
+}
 
-    return await response.json();
+exports.handler = async (event) => {
+  try {
+    return await postToBackend(event);
   } catch (error) {
     console.error('Lambda proxy error:', error.message);
     return ERROR_RESPONSE;
