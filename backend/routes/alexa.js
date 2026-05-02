@@ -377,7 +377,9 @@ async function handleGenerateNewPlan(user, sessionAttributes) {
       false, sessionAttributes
     );
   } catch (error) {
-    console.error('Generate plan error:', error);
+    console.error('Generate plan error [name]:', error.name);
+    console.error('Generate plan error [message]:', error.message);
+    console.error('Generate plan error [status]:', error.status);
     return buildResponse('Hubo un error al generar tu plan. Por favor intenta de nuevo.', false, sessionAttributes);
   }
 }
