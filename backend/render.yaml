@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: runner-coach-backend
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: MONGODB_URI
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: PORT
+        value: 10000

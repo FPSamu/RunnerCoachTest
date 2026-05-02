@@ -1,0 +1,32 @@
+{
+  "manifest": {
+    "publishingInformation": {
+      "locales": {
+        "es-MX": {
+          "name": "Runner Coach",
+          "summary": "Tu entrenador personal de running con inteligencia artificial.",
+          "description": "Runner Coach es tu entrenador personal de running con IA. Crea planes semanales personalizados con Google Gemini, registra tus sesiones, y adapta la intensidad según tu progreso. Solo usa tu voz para organizar y registrar todos tus entrenamientos.",
+          "examplePhrases": [
+            "Alexa, abre Runner Coach",
+            "¿Qué me toca correr hoy?",
+            "Ya terminé de correr"
+          ],
+          "keywords": ["running", "correr", "entrenamiento", "maratón", "fitness", "coach"]
+        }
+      },
+      "isAvailableWorldwide": false,
+      "testingInstructions": "Abre la skill y sigue el proceso de onboarding.",
+      "category": "HEALTH_AND_FITNESS",
+      "distributionCountries": ["MX", "US", "ES"]
+    },
+    "apis": {
+      "custom": {
+        "endpoint": {
+          "sourceDir": "lambda"
+        }
+      }
+    },
+    "manifestVersion": "1.0",
+    "permissions": []
+  }
+}

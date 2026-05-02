@@ -1,0 +1,245 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "runner coach",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.FallbackIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "GetTodayWorkoutIntent",
+          "slots": [],
+          "samples": [
+            "qué me toca hoy",
+            "qué me toca correr hoy",
+            "cuál es mi entrenamiento de hoy",
+            "cuál es el plan de hoy",
+            "qué debo hacer hoy",
+            "dime mi entrenamiento de hoy",
+            "qué corro hoy",
+            "qué entrenamiento tengo hoy",
+            "mi entrenamiento de hoy",
+            "qué ejercicio hago hoy",
+            "cómo es mi entrenamiento de hoy",
+            "dime qué toca hoy"
+          ]
+        },
+        {
+          "name": "LogWorkoutIntent",
+          "slots": [],
+          "samples": [
+            "ya terminé de correr",
+            "terminé mi entrenamiento",
+            "acabo de terminar de correr",
+            "registrar mi entrenamiento",
+            "ya entrené",
+            "ya corrí",
+            "quiero registrar mi sesión",
+            "registra mi sesión de hoy",
+            "anotar entrenamiento",
+            "guardé mi entrenamiento",
+            "ya terminé"
+          ]
+        },
+        {
+          "name": "ProvideDurationIntent",
+          "slots": [
+            {
+              "name": "duration",
+              "type": "AMAZON.NUMBER"
+            }
+          ],
+          "samples": [
+            "corrí {duration} minutos",
+            "{duration} minutos",
+            "duré {duration} minutos",
+            "corrí durante {duration} minutos",
+            "estuve corriendo {duration} minutos",
+            "fueron {duration} minutos",
+            "{duration}"
+          ]
+        },
+        {
+          "name": "ProvideEffortIntent",
+          "slots": [
+            {
+              "name": "effort",
+              "type": "AMAZON.NUMBER"
+            }
+          ],
+          "samples": [
+            "un {effort}",
+            "{effort}",
+            "un {effort} de diez",
+            "{effort} de diez",
+            "lo califico con {effort}",
+            "fue un {effort}",
+            "diría que un {effort}",
+            "{effort} sobre diez"
+          ]
+        },
+        {
+          "name": "GenerateNewPlanIntent",
+          "slots": [],
+          "samples": [
+            "generar nuevo plan",
+            "genera mi plan de la semana",
+            "nuevo plan de entrenamiento",
+            "crear plan de entrenamiento",
+            "genera un nuevo plan",
+            "crea mi plan semanal",
+            "quiero un nuevo plan",
+            "actualiza mi plan",
+            "genera mi entrenamiento de la semana",
+            "hazme un plan nuevo"
+          ]
+        },
+        {
+          "name": "UpdateLevelIntent",
+          "slots": [
+            {
+              "name": "level",
+              "type": "RUNNING_LEVEL"
+            }
+          ],
+          "samples": [
+            "cambiar mi nivel a {level}",
+            "cambiar nivel a {level}",
+            "mi nivel es {level}",
+            "ahora soy {level}",
+            "actualizar mi nivel a {level}",
+            "cambia mi nivel a {level}",
+            "soy nivel {level}",
+            "quiero cambiar mi nivel a {level}"
+          ]
+        },
+        {
+          "name": "UpdateGoalIntent",
+          "slots": [
+            {
+              "name": "goal",
+              "type": "RUNNING_GOAL"
+            }
+          ],
+          "samples": [
+            "mi nueva meta es {goal}",
+            "cambiar mi meta a {goal}",
+            "quiero correr {goal}",
+            "mi objetivo es {goal}",
+            "mi meta ahora es {goal}",
+            "actualizar mi meta a {goal}",
+            "cambia mi meta a {goal}",
+            "ahora mi meta es {goal}"
+          ]
+        },
+        {
+          "name": "UpdateFrequencyIntent",
+          "slots": [
+            {
+              "name": "days",
+              "type": "AMAZON.NUMBER"
+            }
+          ],
+          "samples": [
+            "quiero entrenar {days} días a la semana",
+            "voy a entrenar {days} días",
+            "cambiar a {days} días por semana",
+            "entrenar {days} días",
+            "ahora voy a entrenar {days} días a la semana",
+            "actualizar a {days} días de entrenamiento",
+            "cambiar frecuencia a {days} días"
+          ]
+        },
+        {
+          "name": "ProvideInfoIntent",
+          "slots": [
+            {
+              "name": "userInput",
+              "type": "AMAZON.SearchQuery"
+            }
+          ],
+          "samples": [
+            "{userInput}"
+          ]
+        }
+      ],
+      "types": [
+        {
+          "name": "RUNNING_LEVEL",
+          "values": [
+            {
+              "name": {
+                "value": "principiante",
+                "synonyms": ["básico", "novato", "nuevo en el running", "empezando"]
+              }
+            },
+            {
+              "name": {
+                "value": "intermedio",
+                "synonyms": ["medio", "moderado"]
+              }
+            },
+            {
+              "name": {
+                "value": "avanzado",
+                "synonyms": ["experto", "profesional", "experimentado", "elite"]
+              }
+            }
+          ]
+        },
+        {
+          "name": "RUNNING_GOAL",
+          "values": [
+            {
+              "name": {
+                "value": "5k",
+                "synonyms": ["cinco kilómetros", "cinco k", "cinco kms"]
+              }
+            },
+            {
+              "name": {
+                "value": "10k",
+                "synonyms": ["diez kilómetros", "diez k", "diez kms"]
+              }
+            },
+            {
+              "name": {
+                "value": "medio maratón",
+                "synonyms": ["media maratón", "veintiún kilómetros", "21k", "21 km"]
+              }
+            },
+            {
+              "name": {
+                "value": "maratón",
+                "synonyms": ["cuarenta y dos kilómetros", "maratón completo", "42k", "42 km"]
+              }
+            },
+            {
+              "name": {
+                "value": "condición física general",
+                "synonyms": ["ponerme en forma", "mejorar condición física", "correr mejor", "mejorar mi forma", "estar en forma"]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

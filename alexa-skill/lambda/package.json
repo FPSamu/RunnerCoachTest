@@ -1,0 +1,7 @@
+{
+  "name": "runner-coach-lambda",
+  "version": "1.0.0",
+  "description": "Lambda proxy for Runner Coach Alexa skill",
+  "main": "index.js",
+  "dependencies": {}
+}
