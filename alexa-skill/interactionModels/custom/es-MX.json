@@ -162,6 +162,9 @@
             }
           ],
           "samples": [
+            "{days}",
+            "{days} días",
+            "{days} días a la semana",
             "quiero entrenar {days} días a la semana",
             "voy a entrenar {days} días",
             "cambiar a {days} días por semana",

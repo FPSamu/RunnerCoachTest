@@ -123,7 +123,7 @@ function resumeOnboardingPrompt(step, sessionAttributes) {
     name: '¡Bienvenido a Runner Coach, tu entrenador personal de running con inteligencia artificial! Para comenzar, ¿cómo te llamas?',
     level: '¿Cuál es tu nivel de experiencia en running? ¿Eres principiante, intermedio o avanzado?',
     goal: '¿Cuál es tu meta de running? Por ejemplo: correr 5k, 10k, un medio maratón, un maratón, o mejorar tu condición física general.',
-    days: '¿Cuántos días a la semana puedes entrenar?'
+    days: '¿Cuántos días a la semana puedes entrenar? Di por ejemplo: tres días, cuatro días, o cinco días.'
   };
   const reprompts = {
     name: '¿Cuál es tu nombre?',
@@ -191,14 +191,14 @@ async function handleOnboarding(alexaUserId, request, sessionAttributes, user) {
       }
       await User.findOneAndUpdate({ alexaUserId }, { goal, onboardingStep: 'days' });
       return buildResponse(
-        `¡Excelente meta! Por último, ¿cuántos días a la semana puedes entrenar?`,
-        false, sessionAttributes, '¿Cuántos días a la semana quieres entrenar?'
+        `¡Excelente meta! Por último, ¿cuántos días a la semana puedes entrenar? Di por ejemplo: tres días, cuatro días, o cinco días.`,
+        false, sessionAttributes, '¿Cuántos días? Di por ejemplo: tres días o cuatro días.'
       );
     }
 
     case 'days': {
       if (!userInput) {
-        return buildResponse('¿Cuántos días a la semana quieres entrenar?', false, sessionAttributes);
+        return buildResponse('¿Cuántos días a la semana? Di por ejemplo: tres días, cuatro días, o cinco días.', false, sessionAttributes);
       }
       let trainingDays;
       try {
